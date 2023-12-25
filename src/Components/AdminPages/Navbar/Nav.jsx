@@ -32,6 +32,8 @@ import {
 } from "@mui/icons-material"; // Import icons
 import DrawerComp from "./DrawerComp";
 import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { JobData } from "../../ReduxSlice/JobRoleSlice";
 const options = [
   { id: 1, title: "My Profile", icon: <AccountCircle /> },
   { id: 2, title: "Notifications", icon: <Notifications /> },
@@ -43,6 +45,7 @@ const options = [
 const Nav = () => {
   const { formData } = useSelector((state) => state.userData);
   const nav = useNavigate();
+  const dispatch = useDispatch();
   const location = useLocation();
 
   const [open, setOpen] = React.useState(false);
@@ -166,6 +169,10 @@ const Nav = () => {
                         primary="Tests"
                         sx={{
                           color: "black",
+                        }}
+                        onClick={() => {
+                          console.log("click");
+                          dispatch(JobData("All"));
                         }}
                       />
                     </Link>

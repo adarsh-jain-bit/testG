@@ -13,6 +13,8 @@ import {
 import MenuIcon from "@mui/icons-material/Menu";
 import { Link } from "react-router-dom";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import { useDispatch, useSelector } from "react-redux";
+import { JobData } from "../../ReduxSlice/JobRoleSlice";
 const pages = [
   { name: "My assessments", link: "/MyAssessment" },
   { name: "My candidates", link: "/MyCandidates" },
@@ -20,8 +22,13 @@ const pages = [
   { name: "My Profile", link: "/MyProfile" },
 ];
 const DrawerComp = () => {
+  const dispatch = useDispatch();
   const [openDrawer, setOpenDrawer] = useState(false);
-
+  const changePage = (pages) => {
+    if (pages === "Tests") {
+      dispatch(JobData("All"));
+    }
+  };
   return (
     <React.Fragment>
       <Drawer
@@ -65,7 +72,10 @@ const DrawerComp = () => {
                     sx={{
                       color: "black",
                     }}
-                    onClick={() => setOpenDrawer(!openDrawer)}
+                    onClick={() => {
+                      changePage(name);
+                      setOpenDrawer(!openDrawer);
+                    }}
                   ></ListItemText>
                 </Link>
               </ListItemIcon>

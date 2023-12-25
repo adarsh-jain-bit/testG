@@ -14,7 +14,7 @@ export const userData = createAsyncThunk(
     try {
       dispatch(userDataStart());
       const response = await axios.get(
-        "http://localhost:5000/api/auth/getuser",
+        "https://testifybackend.onrender.com/api/auth/getuser",
         {
           headers: {
             authToken: usertoken,

@@ -8,9 +8,10 @@ export const JobData = createAsyncThunk(
     try {
       dispatch(Start());
       const response = await axios.get(
-        `http://localhost:5000/api/data/jobRolesData/${data}`
+        `https://testifybackend.onrender.com/api/data/jobRolesData/${data}`
       );
       dispatch(Success(response.data));
+      console.log("data of job role", response.data);
       return response.data;
     } catch (error) {
       dispatch(Failure(error.message));
@@ -23,7 +24,7 @@ const initialState = {
   isLoading: false,
   error: null,
   success: false,
-  JobRoleData: {},
+  JobRoleData: [],
 };
 
 const JobRole = createSlice({

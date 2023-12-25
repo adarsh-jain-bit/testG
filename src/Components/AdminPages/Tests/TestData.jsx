@@ -8,17 +8,18 @@ const TestData = ({ addButton, addTest }) => {
   console.log(JobRoleData);
   return (
     <Grid container spacing={4} mt={3}>
-      {JobRoleData.map(({ name, desc }, index) => {
-        return (
-          <TestCard
-            index={index}
-            name={name}
-            desc={desc}
-            addButton={addButton}
-            addTest={addTest}
-          />
-        );
-      })}
+      {JobRoleData.length > 1 &&
+        JobRoleData?.map(({ name, desc }, index) => {
+          return (
+            <TestCard
+              index={index}
+              name={name}
+              desc={desc}
+              addButton={addButton}
+              addTest={addTest}
+            />
+          );
+        })}
     </Grid>
   );
 };

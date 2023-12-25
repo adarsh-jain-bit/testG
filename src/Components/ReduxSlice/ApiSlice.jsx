@@ -9,7 +9,7 @@ export const submitSignUp = createAsyncThunk(
     try {
       dispatch(submitFormStart());
       const response = await axios.post(
-        "http://localhost:5000/api/auth/signup",
+        "https://testifybackend.onrender.com/api/auth/signup",
         formData
       );
       dispatch(submitFormSuccess(response.data));

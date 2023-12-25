@@ -10,7 +10,7 @@ export const submitLogin = createAsyncThunk(
     try {
       dispatch(submitLoginStart());
       const response = await axios.post(
-        "http://localhost:5000/api/auth/login",
+        "https://testifybackend.onrender.com/api/auth/login",
         loginData
       );
       dispatch(submitLoginSuccess(response.data));
