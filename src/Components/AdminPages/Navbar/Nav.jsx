@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import {
   Paper,
   Stack,
@@ -31,7 +31,7 @@ import {
   ExitToApp,
 } from "@mui/icons-material"; // Import icons
 import DrawerComp from "./DrawerComp";
-
+import { useSelector } from "react-redux";
 const options = [
   { id: 1, title: "My Profile", icon: <AccountCircle /> },
   { id: 2, title: "Notifications", icon: <Notifications /> },
@@ -41,6 +41,7 @@ const options = [
   { id: 7, title: "Log out", icon: <ExitToApp /> },
 ];
 const Nav = () => {
+  const { formData } = useSelector((state) => state.userData);
   const nav = useNavigate();
   const location = useLocation();
 
@@ -248,9 +249,10 @@ const Nav = () => {
                         sx={{
                           color: "black",
                           borderColor: "black",
+                          width: "150px",
                         }}
                       >
-                        Name
+                        {formData.name ? formData.name : "Name"}
                       </Button>
                     </ButtonGroup>
                     <Popper

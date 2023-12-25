@@ -10,7 +10,7 @@ export const submitLogin = createAsyncThunk(
     try {
       dispatch(submitLoginStart());
       const response = await axios.post(
-        "https://testify-qvv2.onrender.com/org/login",
+        "http://localhost:5000/api/auth/login",
         loginData
       );
       dispatch(submitLoginSuccess(response.data));
@@ -25,7 +25,6 @@ export const submitLogin = createAsyncThunk(
 );
 
 const initialState = {
-  loginData: {},
   isLoading: false,
   error: null,
   success: false,
@@ -45,9 +44,8 @@ const loginSlice = createSlice({
     submitLoginSuccess: (state, action) => {
       state.isLoading = false;
       state.success = true;
-      state.formData = action.payload.data;
       state.access_token = action.payload.access_token;
-      state.status = action.payload.status;
+      state.status = action.payload.success ? "success" : "failed";
     },
     submitLoginFailure: (state, action) => {
       state.isLoading = false;

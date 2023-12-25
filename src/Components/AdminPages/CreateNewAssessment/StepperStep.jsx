@@ -20,12 +20,11 @@ import {
 const steps = ["Name assessment", "Select tests", "Review and configure"];
 
 function StepperStep() {
-  const dispatch = useDispatch();
   const { assessmentName, language, jobRole, move, error } = useSelector(
     (state) => state.newAssessmentField
   );
   const data = useSelector((state) => state.newAssessmentField);
-
+  const dispatch = useDispatch();
   console.log(data);
   const [activeStep, setActiveStep] = useState(0);
   const [completed, setCompleted] = useState({});

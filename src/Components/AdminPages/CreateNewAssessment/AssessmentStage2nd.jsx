@@ -12,6 +12,7 @@ const ListItem = styled("li")(({ theme }) => ({
 }));
 
 function AssessmentStage2nd() {
+  const [addTestName, setAddTestName] = useState([]);
   const [chipData, setChipData] = useState([
     { key: 0, label: "1st Test" },
     { key: 1, label: "2st Test" },
@@ -26,7 +27,17 @@ function AssessmentStage2nd() {
       chips.filter((chip) => chip.key !== chipToDelete.key)
     );
   };
-
+  const addTest = (name) => {
+    setAddTestName([...addTestName, name]);
+  };
+  const combinedData = chipData.map((data, index) => {
+    if (addTestName.length > index) {
+      return { key: data.key, label: addTestName[index] };
+    } else {
+      return data;
+    }
+  });
+  console.log(addTestName[0]);
   return (
     <div>
       <Stack direction="row" justifyContent="center" spacing={5} mb={10}>
@@ -42,14 +53,30 @@ function AssessmentStage2nd() {
           }}
           component="ul"
         >
-          {chipData.map((data) => {
+          {combinedData.map((data) => {
             let icon;
 
             return (
               <ListItem key={data.key}>
                 <Box
                   component="span"
-                  sx={{ p: 1.5, border: "1px dashed grey", mx: 3 }}
+                  sx={{
+                    p: 1.5,
+                    border:
+                      addTestName.length > data.key
+                        ? "1px dashed white"
+                        : "1px dashed grey",
+                    mx: 3,
+                    backgroundColor:
+                      addTestName.length > data.key ? "gray" : "white",
+                    ".css-9d4p3e-MuiButtonBase-root-MuiChip-root .MuiChip-deleteIcon":
+                      {
+                        color:
+                          addTestName.length > data.key
+                            ? "white"
+                            : "rgba(25, 118, 210, 0.7)",
+                      },
+                  }}
                 >
                   <Chip
                     icon={icon}
@@ -58,7 +85,13 @@ function AssessmentStage2nd() {
                     color="primary"
                     variant="outlined"
                     size="large"
-                    sx={{ border: "none", my: 1, fontSize: 20 }}
+                    sx={{
+                      border: "none",
+                      my: 1,
+                      fontSize: 20,
+                      color:
+                        addTestName.length > data.key ? "white" : undefined,
+                    }}
                   />
                 </Box>
               </ListItem>
@@ -89,7 +122,7 @@ function AssessmentStage2nd() {
       </Stack>
       {/* test data */}
       <Stack direction="row" justifyContent="space-between">
-        <TestData addButton={true} />
+        <TestData addButton={true} addTest={addTest} />
       </Stack>
     </div>
   );

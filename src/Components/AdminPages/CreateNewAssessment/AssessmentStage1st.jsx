@@ -3,11 +3,13 @@ import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
 import Stack from "@mui/material/Stack";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { JobData } from "../../ReduxSlice/JobRoleSlice";
 function AssessmentStage1st({ onFieldChange, validate }) {
   const { assessmentName, language, jobRole, error } = useSelector(
     (state) => state.newAssessmentField
   );
+  const dispatch = useDispatch();
   return (
     <div>
       <Box
@@ -61,6 +63,7 @@ function AssessmentStage1st({ onFieldChange, validate }) {
             value={jobRole}
             onChange={(_, newValue) => {
               onFieldChange("jobRole", newValue);
+              dispatch(JobData(newValue.split(" ")[0]));
             }}
             onBlur={() => validate("jobRole")}
             renderInput={(params) => (
@@ -84,6 +87,4 @@ const languages = ["English", "Hindi", "Turkey", "Spanish"];
 const jobRoles = [
   "Frontend Developer",
   "Backend Developer",
-  "FullStack Developer",
-  "Java Developer",
 ];

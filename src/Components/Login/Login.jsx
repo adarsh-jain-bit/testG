@@ -121,7 +121,7 @@ const Login = () => {
   };
   useEffect(() => {
     // console.log("in1");
-    if (status === "Success") {
+    if (status === "success") {
       // console.log("in");
       localStorage.setItem("token", access_token);
       localStorage.setItem("loggedIn", rememberMe);

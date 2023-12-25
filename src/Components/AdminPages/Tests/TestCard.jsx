@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Stack, Typography, Grid, Paper } from "@mui/material";
 import { styled } from "@mui/system";
 import AccessAlarmsIcon from "@mui/icons-material/AccessAlarms";
@@ -23,7 +23,8 @@ const Item = styled(Paper)({
   minHeight: "300px", // Adjust the height as needed
 });
 
-const TestCard = ({ index, name, desc, addButton }) => {
+const TestCard = ({ index, name, desc, addButton, addTest }) => {
+  const [clicked, setClicked] = useState(false);
   return (
     <Grid item xs md={3} key={index} mb="20px">
       <Item elevation={4}>
@@ -53,6 +54,11 @@ const TestCard = ({ index, name, desc, addButton }) => {
                   background: "#5C5470",
                   color: "white",
                   p: "5px 10px",
+                }}
+                disabled={clicked}
+                onClick={() => {
+                  addTest(name);
+                  setClicked(true);
                 }}
               >
                 Add

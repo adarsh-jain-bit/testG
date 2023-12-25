@@ -52,7 +52,7 @@ const SignUp = () => {
   };
   useEffect(() => {
     // console.log("in1");
-    if (status === "Success") {
+    if (status === "success") {
       // console.log("in");
       localStorage.setItem("token", access_token);
       localStorage.setItem("loggedIn", rememberMe);
@@ -203,7 +203,7 @@ const SignUp = () => {
               }}
             />
           }
-          label="Remember me?"
+          label="Keep me SignedUp in?"
           sx={{
             color: "white",
           }}

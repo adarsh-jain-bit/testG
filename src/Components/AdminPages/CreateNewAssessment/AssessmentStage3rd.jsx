@@ -11,11 +11,13 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import Button from "@mui/material/Button";
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
-    backgroundColor: theme.palette.common.black,
+    backgroundColor: "gray",
     color: theme.palette.common.white,
+    paddingLeft: "60px",
   },
   [`&.${tableCellClasses.body}`]: {
     fontSize: 14,
+    paddingLeft: "60px",
   },
 }));
 
@@ -46,26 +48,16 @@ function AssessmentStage3rd() {
       <Table sx={{ minWidth: 700 }} aria-label="customized table">
         <TableHead>
           <TableRow>
-            <StyledTableCell align="center">Test ID</StyledTableCell>
+            <StyledTableCell align="left">Test ID</StyledTableCell>
             <StyledTableCell align="center">Test Name</StyledTableCell>
-            <StyledTableCell align="center">Test Time</StyledTableCell>
-            <StyledTableCell align="center">Action</StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {rows.map((row) => (
             <StyledTableRow key={row.testId}>
-              <StyledTableCell component="th" scope="row" align="center">
-                {row.testId}
-              </StyledTableCell>
-              <StyledTableCell align="center">{row.testName}</StyledTableCell>
+              <StyledTableCell align="left">{row.testName}</StyledTableCell>
               <StyledTableCell align="center">
                 {row.testTime} mins
-              </StyledTableCell>
-              <StyledTableCell align="center">
-                <Button>
-                  <DeleteIcon />
-                </Button>
               </StyledTableCell>
             </StyledTableRow>
           ))}

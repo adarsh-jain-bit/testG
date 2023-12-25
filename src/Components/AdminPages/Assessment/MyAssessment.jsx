@@ -23,7 +23,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { useTheme } from "@mui/material/styles";
 import { driver } from "driver.js";
 import "driver.js/dist/driver.css";
-
+import { userData } from "../../ReduxSlice/UserDataslice";
+import { useDispatch } from "react-redux";
 const MyAssessment = () => {
   const theme = useTheme();
   const navigate = useNavigate();
@@ -35,7 +36,7 @@ const MyAssessment = () => {
   }
   const loggedIn = localStorage.getItem("loggedIn");
   const token = localStorage.getItem("token");
-
+  const dispatch = useDispatch();
   const rows = [
     createData("Frozen yoghurt", 159, 6.0, 24, 4.0),
     createData("Ice cream sandwich", 237, 9.0, 37, 4.3),
@@ -111,9 +112,10 @@ const MyAssessment = () => {
   });
   useEffect(() => {
     if (token == undefined || loggedIn == false || !token) {
-      // console.log(" my assessment");
       navigate("/login");
     } else {
+      console.log("dispatched");
+      dispatch(userData(token));
       driverObj.drive();
     }
   }, []);
