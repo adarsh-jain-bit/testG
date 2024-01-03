@@ -52,9 +52,9 @@ const Nav = () => {
   const anchorRef = React.useRef(null);
 
   const handleMenuItemClick = (option) => {
-    // console.log(option, typeof option);
+    console.log(option, typeof option);
     if (option === "Log out") {
-      // console.log("log out");
+      console.log("log out");
       localStorage.clear();
       nav("/login");
     } else {
