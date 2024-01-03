@@ -51,11 +51,11 @@ const Nav = () => {
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef(null);
 
-  const handleMenuItemClick = (option) => {
+  const handleMenuItemClick = async (option) => {
     console.log(option, typeof option);
     if (option === "Log out") {
       console.log("log out");
-      localStorage.clear();
+      await localStorage.clear();
       nav("/login");
     } else {
       const newOption = option.replace(/ /g, "");
