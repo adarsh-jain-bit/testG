@@ -17,8 +17,7 @@ export const submitLogin = createAsyncThunk(
       console.log(response.data);
       return response.data;
     } catch (error) {
-      dispatch(submitLoginFailure(error.message));
-      console.log(error);
+      dispatch(submitLoginFailure(error?.response?.data));
       return rejectWithValue(error.message);
     }
   }

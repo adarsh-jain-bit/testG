@@ -114,7 +114,7 @@ const MyAssessment = () => {
     if (token == undefined || loggedIn == false || !token) {
       navigate("/login");
     } else {
-      console.log("dispatched");
+      // console.log("dispatched");
       dispatch(userData(token));
       driverObj.drive();
     }

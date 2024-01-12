@@ -11,7 +11,7 @@ export const JobData = createAsyncThunk(
         `https://testifybackend.onrender.com/api/data/jobRolesData/${data}`
       );
       dispatch(Success(response.data));
-      console.log("data of job role", response.data);
+      // console.log("data of job role", response.data);
       return response.data;
     } catch (error) {
       dispatch(Failure(error.message));

@@ -16,7 +16,8 @@ export const submitSignUp = createAsyncThunk(
       console.log(response.data);
       return response.data;
     } catch (error) {
-      dispatch(submitFormFailure(error.message));
+      // console.log(error);
+      dispatch(submitFormFailure(error?.response?.data));
       return rejectWithValue(error.message);
     }
   }
@@ -50,9 +51,18 @@ const ApiSlice = createSlice({
       state.isLoading = false;
       state.error = action.payload;
     },
+    resetForm: (state, action) => {
+      localStorage.clear();
+      state.access_token = "";
+      state.status = "";
+    },
   },
 });
 
-export const { submitFormStart, submitFormSuccess, submitFormFailure } =
-  ApiSlice.actions;
+export const {
+  submitFormStart,
+  submitFormSuccess,
+  submitFormFailure,
+  resetForm,
+} = ApiSlice.actions;
 export default ApiSlice.reducer;

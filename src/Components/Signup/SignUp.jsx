@@ -11,9 +11,11 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { submitSignUp } from "../ReduxSlice/ApiSlice";
 import { LoginFormLoginPage, LoginButton } from "../Common/GlobalWrapper";
+import { toast } from "react-toastify";
 const SignUp = () => {
-  const { formData, status, access_token } = useSelector((state) => state.api);
+  const { error, status, access_token } = useSelector((state) => state.api);
   const [flip, setFlip] = useState(false);
+  // console.log(error);
   const [signUp, setSignUp] = useState({
     name: "",
     email: "",
@@ -26,11 +28,10 @@ const SignUp = () => {
   });
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
   const [rememberMe, setRememberMe] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const handleClickShowPassword = () => setShowPassword((show) => !show);
-  // console.log(rememberMe);
-  console.log(formData, status, access_token);
   const handleSignUp = async (e) => {
     e.preventDefault();
     const { name, email, password } = signUp;
@@ -51,14 +52,27 @@ const SignUp = () => {
     }
   };
   useEffect(() => {
-    // console.log("in1");
     if (status === "success") {
       // console.log("in");
       localStorage.setItem("token", access_token);
       localStorage.setItem("loggedIn", rememberMe);
       navigate("/");
     }
-  }, [status, access_token, navigate]);
+    if (error != null) {
+      console.log("in");
+      toast.error(error.error, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
+    }
+  }, [status, access_token, navigate, error]);
+  console.log(error);
 
   const handleSignUpChange = (e) => {
     const { name, value } = e.target;

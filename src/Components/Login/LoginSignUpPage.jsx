@@ -6,7 +6,7 @@ import { Background, BackSidebox } from "../Common/GlobalWrapper";
 import SignUp from "../Signup/SignUp";
 import Login from "./Login";
 
-const LoginSignUp = ({ onLogin }) => {
+const LoginSignUp = () => {
   const [flip, setFlip] = useState(false);
 
   return (
@@ -64,7 +64,7 @@ const LoginSignUp = ({ onLogin }) => {
       >
         <ReactCardFlip isFlipped={flip} flipDirection="horizontal">
           <SignUp />
-          <Login onLogin={onLogin} />
+          <Login />
         </ReactCardFlip>
       </Stack>
     </Background>

@@ -23,7 +23,6 @@ const Test = () => {
   const Language = ["Hindi", "English", "Urdu", "German"];
   const JobRole = ["Backend", "Frontend", "Full Stack"];
   const TestType = ["Aptitude Test", "Typing Test", "Software Skills"];
-  const dispatch = useDispatch();
   const onlySmallScreen = useMediaQuery("(min-width:500px)");
   const onlyLargeScreen = useMediaQuery("(min-width:1000px)");
   const buttonStyle = {

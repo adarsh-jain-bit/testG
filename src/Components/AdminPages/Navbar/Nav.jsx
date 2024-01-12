@@ -34,6 +34,7 @@ import DrawerComp from "./DrawerComp";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { JobData } from "../../ReduxSlice/JobRoleSlice";
+import { resetForm } from "../../ReduxSlice/ApiSlice";
 const options = [
   { id: 1, title: "My Profile", icon: <AccountCircle /> },
   { id: 2, title: "Notifications", icon: <Notifications /> },
@@ -51,11 +52,11 @@ const Nav = () => {
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef(null);
 
-  const handleMenuItemClick = async (option) => {
-    console.log(option, typeof option);
+  const handleMenuItemClick = (option) => {
+    // console.log(option, typeof option);
     if (option === "Log out") {
       console.log("log out");
-      await localStorage.clear();
+      dispatch(resetForm());
       nav("/login");
     } else {
       const newOption = option.replace(/ /g, "");

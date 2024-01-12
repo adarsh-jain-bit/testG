@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-
 import { styled } from "@mui/material/styles";
 import Chip from "@mui/material/Chip";
 import Box from "@mui/material/Box";
@@ -7,12 +6,16 @@ import TestData from "../Tests/TestData";
 import { Stack, Grid, Paper, useMediaQuery } from "@mui/material";
 import CustomDropDown from "../../Common/CustomDropDown";
 import { useTheme } from "@mui/material/styles";
+import { useSelector } from "react-redux";
+
 const ListItem = styled("li")(({ theme }) => ({
   margin: theme.spacing(0.5),
 }));
 
-function AssessmentStage2nd() {
+function AssessmentStage2nd({ onFieldChange }) {
   const [addTestName, setAddTestName] = useState([]);
+  const data = useSelector((state) => state.newAssessmentField);
+  console.log(data);
   const [chipData, setChipData] = useState([
     { key: 0, label: "1st Test" },
     { key: 1, label: "2st Test" },
@@ -23,12 +26,14 @@ function AssessmentStage2nd() {
   const theme = useTheme();
   const onlySmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
   const handleDelete = (chipToDelete) => () => {
+    console.log(chipToDelete);
     setChipData((chips) =>
       chips.filter((chip) => chip.key !== chipToDelete.key)
     );
   };
   const addTest = (name) => {
     setAddTestName([...addTestName, name]);
+    onFieldChange("testData", addTestName);
   };
   const combinedData = chipData.map((data, index) => {
     if (addTestName.length > index) {
@@ -37,7 +42,7 @@ function AssessmentStage2nd() {
       return data;
     }
   });
-  console.log(addTestName[0]);
+  console.log(combinedData);
   return (
     <div>
       <Stack direction="row" justifyContent="center" spacing={5} mb={10}>

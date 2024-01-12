@@ -4,7 +4,7 @@ import { styled } from "@mui/system";
 import AccessAlarmsIcon from "@mui/icons-material/AccessAlarms";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import DetailModal from "../../Common/Modal/DetailModal";
-
+import ConfirmationModal from "../../Common/Modal/confirmationModal";
 const Button = styled("button")({
   letterSpacing: "1px",
   borderRadius: "5px",
@@ -25,6 +25,19 @@ const Item = styled(Paper)({
 
 const TestCard = ({ index, name, desc, addButton, addTest }) => {
   const [clicked, setClicked] = useState(false);
+  const [open, setOpen] = React.useState(false);
+  const [testName, setTestName] = useState("");
+  const handleClickOpen = (name) => {
+    setOpen(true);
+    setTestName(name);
+  };
+  const handleClose = (confirmation = true) => {
+    setOpen(false);
+    setClicked(true);
+    if (confirmation) {
+      addTest(name);
+    }
+  };
   return (
     <Grid item xs md={3} key={index} mb="20px">
       <Item elevation={4}>
@@ -57,11 +70,17 @@ const TestCard = ({ index, name, desc, addButton, addTest }) => {
                 }}
                 disabled={clicked}
                 onClick={() => {
-                  addTest(name);
                   setClicked(true);
+                  handleClickOpen(name);
                 }}
               >
                 Add
+                <ConfirmationModal
+                  setOpen={setOpen}
+                  open={open}
+                  testName={testName}
+                  handleClose={handleClose}
+                />
               </Button>
             )}
           </Grid>

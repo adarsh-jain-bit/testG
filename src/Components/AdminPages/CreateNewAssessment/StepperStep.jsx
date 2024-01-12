@@ -23,9 +23,7 @@ function StepperStep() {
   const { assessmentName, language, jobRole, move, error } = useSelector(
     (state) => state.newAssessmentField
   );
-  const data = useSelector((state) => state.newAssessmentField);
   const dispatch = useDispatch();
-  console.log(data);
   const [activeStep, setActiveStep] = useState(0);
   const [completed, setCompleted] = useState({});
 
@@ -210,7 +208,9 @@ function StepperStep() {
                   validate={validate}
                 />
               )}
-              {activeStep === 1 && <AssessmentStage2nd />}
+              {activeStep === 1 && (
+                <AssessmentStage2nd onFieldChange={handleFieldChange} />
+              )}
               {activeStep === 2 && <AssessmentStage3rd />}
             </Typography>
           </React.Fragment>

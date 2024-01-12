@@ -10,6 +10,7 @@ const fieldsSlice = createSlice({
     language: null,
     jobRole: null,
     move: false,
+   testData : [] ,
     error: {
       assessmentName: "",
       language: null,

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Input from "../Common/Input";
-
+import { toast } from "react-toastify";
 import {
   Stack,
   Typography,
@@ -21,9 +21,7 @@ const Login = () => {
       password: "",
     },
   });
-  const { formData, status, access_token } = useSelector(
-    (state) => state.login
-  );
+  const { status, access_token, error } = useSelector((state) => state.login);
   const [rememberMe, setRememberMe] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [flip, setFlip] = useState(false);
@@ -114,8 +112,8 @@ const Login = () => {
         email: logIn.email,
         password: logIn.password,
       };
-      console.log(formData);
       // Dispatch the action to submit the signUp data
+
       dispatch(submitLogin(formData));
     }
   };
@@ -126,7 +124,20 @@ const Login = () => {
       localStorage.setItem("loggedIn", rememberMe);
       navigate("/");
     }
-  }, [status, access_token, navigate]);
+    if (error != null) {
+      console.log("in");
+      toast.error(error.error, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
+    }
+  }, [status, access_token, navigate, error]);
 
   return (
     <LoginFormLoginPage>
